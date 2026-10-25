@@ -81,7 +81,7 @@ export function createApp({ dataDir = dataDirectory(), sessionToken, transport =
   audio.dependencies().then(ok => (tools.ffmpeg = ok));
   findPython().then(bin => (tools.python = bin || false));
   app.get('/api/health', async (req, res) =>
-    res.json({ app: 'harmonis', version: '0.1.0', audioTools: await audio.dependencies() })
+    res.json({ app: 'harmonis', version: '0.1.1', audioTools: await audio.dependencies() })
   );
   app.get('/api/state', async (req, res) =>
     res.json({

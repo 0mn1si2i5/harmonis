@@ -4,6 +4,6 @@ docs/
 .moot/
 
 dist/
-release/
+/release/
 .media-build/
 vendor/

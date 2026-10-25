@@ -5,7 +5,7 @@ test-results/
 __pycache__/
 
 dist/
-release/
+/release/
 .media-build/
 vendor/
 .DS_Store

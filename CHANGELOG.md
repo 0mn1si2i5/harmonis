@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 — 2026-10-25
+
+Include the public-release audit script in clean checkouts. Narrow the release-output ignore rule so it does not hide source tooling. Desktop functionality is unchanged.
+
 ## 0.1.0 — 2026-10-25
 
 First public release as **Harmonis · 声间**.
