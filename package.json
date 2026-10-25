@@ -1,0 +1,97 @@
+{
+  "name": "harmonis",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test tests/*.test.js",
+    "check": "node scripts/check.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "desktop": "electron .",
+    "build:media": "bash scripts/build-media.sh",
+    "build:icon": "swift scripts/build-icon.swift",
+    "pack:mac": "electron-builder --mac --arm64 --dir --publish never",
+    "dist:mac": "electron-builder --mac --arm64 --publish never",
+    "audit:public": "node scripts/release/audit-public.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "express": "^5.1.0",
+    "json-bigint": "^1.0.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "26.18.0",
+    "prettier": "3.6.2"
+  },
+  "description": "A local-first voice and music workbench for macOS.",
+  "main": "desktop/main.js",
+  "license": "MIT",
+  "author": "Harmonis contributors",
+  "homepage": "https://github.com/0mn1si2i5/harmonis",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0mn1si2i5/harmonis.git"
+  },
+  "build": {
+    "appId": "io.github.0mn1si2i5.harmonis",
+    "productName": "Harmonis",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "artifactName": "Harmonis-${version}-${os}-${arch}.${ext}",
+    "files": [
+      "desktop/**",
+      "src/**",
+      "public/**",
+      "package.json",
+      "LICENSE"
+    ],
+    "extraResources": [
+      {
+        "from": "vendor/darwin-${arch}",
+        "to": "media"
+      },
+      {
+        "from": "synth",
+        "to": "synth",
+        "filter": [
+          "**/*.py",
+          "**/*.csv",
+          "README.md"
+        ]
+      },
+      {
+        "from": "THIRD_PARTY_NOTICES.md",
+        "to": "THIRD_PARTY_NOTICES.md"
+      }
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.music",
+      "icon": "assets/icon.icns",
+      "identity": "-",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "minimumSystemVersion": "13.0",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "Harmonis uses your microphone only when you choose to record a voice sample."
+      }
+    },
+    "dmg": {
+      "sign": false,
+      "title": "Harmonis ${version}"
+    },
+    "publish": null
+  }
+}
